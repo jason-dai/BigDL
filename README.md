@@ -110,7 +110,7 @@ flowchart TD;
 
   See [TensorFlow](https://bigdl.readthedocs.io/en/latest/doc/Orca/QuickStart/orca-tf-quickstart.html) and [PyTorch](https://bigdl.readthedocs.io/en/latest/doc/Orca/QuickStart/orca-pytorch-quickstart.html) quickstart, as well as the [document website](https://bigdl.readthedocs.io/), for more details.
 
-  </details>
+  </details> 
 
 - In addition, you can also run standard **Ray** programs on Spark cluster using _**RayOnSpark**_ in Orca.
 
@@ -118,18 +118,18 @@ flowchart TD;
   <br/>
   
   You can directly run Ray program on Spark cluster, and write Ray code inline with Spark code (so as to process the in-memory Spark RDDs or DataFrames) using _RayOnSpark_ in Orca.
-
+ 
   ```python
   # 1. Initilize Orca Context (to run your program on K8s, YARN or local laptop)
   from bigdl.orca import init_orca_context, OrcaContext
-  sc = init_orca_context(cluster_mode="yarn", cores=4, memory="10g", num_nodes=2, init_ray_on_spark=True)
+  sc = init_orca_context(cluster_mode="yarn", cores=4, memory="10g", num_nodes=2, init_ray_on_spark=True) 
 
   # 2. Convert Spark DataFrames to Ray Datasets
   spark = OrcaContext.get_spark_session()
   df = spark.read.parquet(file_path)
   from bigdl.orca.data import spark_df_to_ray_dataset
   dataset = spark_df_to_ray_dataset(df)
-
+ 
   # 3. Use Ray to operate on Ray Datasets
   import ray
 
