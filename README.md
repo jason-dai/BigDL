@@ -96,12 +96,12 @@ flowchart TD;
   # (supporting TensorFlow, PyTorch, Keras, OpenVino, etc.)
   from tensorflow import keras
   ...
-  model = keras.models.Model(inputs=[user, item], outputs=predictions) 
+  model = keras.models.Model(inputs=[user, item], outputs=predictions)  
   model.compile(...)
 
   # 4. Use Orca Estimator for distributed training/inference
   from bigdl.orca.learn.tf.estimator import Estimator
-  est = Estimator.from_keras(keras_model=model) 
+  est = Estimator.from_keras(keras_model=model)  
   est.fit(data=df,
           feature_cols=['user', 'item'],
           label_cols=['label'],
