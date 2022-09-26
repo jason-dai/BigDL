@@ -61,7 +61,7 @@ flowchart TD;
  - To install BigDL, we recommend using [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)  environment:
 
     ```bash
-    conda create -n my_env
+    conda create -n my_env 
     conda activate my_env
     pip install bigdl
     ```
