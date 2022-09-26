@@ -40,7 +40,7 @@ flowchart TD;
     Feature3-- High Level App Framework -->Feature4[Domain?];
     Feature4-- Time Series -->ReferChronos([<em><strong>Chronos</strong></em>]);
     Feature4-- Recommendation System -->ReferFriesian([<em><strong>Friesian</strong></em>]);
-    
+
     click ReferNano "https://bigdl.readthedocs.io/en/latest/doc/Nano/Overview/nano.html" "Refer to Nano" _parent
     click ReferOrca "https://bigdl.readthedocs.io/en/latest/doc/Orca/Overview/orca.html"
     click ReferDLlib "https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/dllib.html"
@@ -48,12 +48,12 @@ flowchart TD;
     click ReferChronos "https://bigdl.readthedocs.io/en/latest/doc/Chronos/Overview/chronos.html"
     click ReferFriesian "https://bigdl.readthedocs.io/en/latest/doc/Chronos/Overview/chronos.html"
     click ReferPPML "https://bigdl.readthedocs.io/en/latest/doc/PPML/Overview/ppml.html"
-    
+
     classDef ReferStyle1 fill:#f96;
     classDef Feature fill:#FFF,stroke:#0f29ba,stroke-width:1px;
     class ReferNano,ReferOrca,ReferDLlib,ReferDLlib2,ReferChronos,ReferFriesian,ReferPPML ReferStyle1;
     class Feature1,Feature2,Feature3,Feature4,Feature5,Feature6,Feature7 Feature;
-    
+
 ```
 ---
 ## Installing
@@ -61,7 +61,7 @@ flowchart TD;
  - To install BigDL, we recommend using [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)  environment:
 
     ```bash
-    conda create -n my_env 
+    conda create -n my_env
     conda activate my_env
     pip install bigdl
     ```
@@ -83,7 +83,7 @@ flowchart TD;
   ```python
   # 1. Initilize Orca Context (to run your program on K8s, YARN or local laptop)
   from bigdl.orca import init_orca_context, OrcaContext
-  sc = init_orca_context(cluster_mode="k8s", cores=4, memory="10g", num_nodes=2) 
+  sc = init_orca_context(cluster_mode="k8s", cores=4, memory="10g", num_nodes=2)
 
   # 2. Perform distribtued data processing (supporting Spark DataFrames,
   # TensorFlow Dataset, PyTorch DataLoader, Ray Dataset, Pandas, Pillow, etc.)
@@ -96,12 +96,12 @@ flowchart TD;
   # (supporting TensorFlow, PyTorch, Keras, OpenVino, etc.)
   from tensorflow import keras
   ...
-  model = keras.models.Model(inputs=[user, item], outputs=predictions)  
+  model = keras.models.Model(inputs=[user, item], outputs=predictions)
   model.compile(...)
 
   # 4. Use Orca Estimator for distributed training/inference
   from bigdl.orca.learn.tf.estimator import Estimator
-  est = Estimator.from_keras(keras_model=model)  
+  est = Estimator.from_keras(keras_model=model)
   est.fit(data=df,
           feature_cols=['user', 'item'],
           label_cols=['label'],
@@ -110,26 +110,26 @@ flowchart TD;
 
   See [TensorFlow](https://bigdl.readthedocs.io/en/latest/doc/Orca/QuickStart/orca-tf-quickstart.html) and [PyTorch](https://bigdl.readthedocs.io/en/latest/doc/Orca/QuickStart/orca-pytorch-quickstart.html) quickstart, as well as the [document website](https://bigdl.readthedocs.io/), for more details.
 
-  </details>  
+  </details>
 
 - In addition, you can also run standard **Ray** programs on Spark cluster using _**RayOnSpark**_ in Orca.
 
   <details><summary>Show RayOnSpark example</summary>
   <br/>
-  
+
   You can directly run Ray program on Spark cluster, and write Ray code inline with Spark code (so as to process the in-memory Spark RDDs or DataFrames) using _RayOnSpark_ in Orca.
- 
+
   ```python
   # 1. Initilize Orca Context (to run your program on K8s, YARN or local laptop)
   from bigdl.orca import init_orca_context, OrcaContext
-  sc = init_orca_context(cluster_mode="yarn", cores=4, memory="10g", num_nodes=2, init_ray_on_spark=True) 
+  sc = init_orca_context(cluster_mode="yarn", cores=4, memory="10g", num_nodes=2, init_ray_on_spark=True)
 
   # 2. Convert Spark DataFrames to Ray Datasets
   spark = OrcaContext.get_spark_session()
   df = spark.read.parquet(file_path)
   from bigdl.orca.data import spark_df_to_ray_dataset
   dataset = spark_df_to_ray_dataset(df)
-  
+
   # 3. Use Ray to operate on Ray Datasets
   import ray
 
@@ -144,42 +144,66 @@ flowchart TD;
   ```
 
   See the RayOnSpark [user guide](https://bigdl.readthedocs.io/en/latest/doc/Ray/Overview/ray.html) and [quickstart](https://bigdl.readthedocs.io/en/latest/doc/Ray/QuickStart/ray-quickstart.html) for more details.
-  </details>  
+  </details>
 
 
 ### DLlib
 
 With _DLlib_, you can write distributed deep learning applications as standard (**Scala** or **Python**) Spark programs, using the same *Spark DataFrame* and *ML Pipeline* APIs.
 
-<details><summary>Show DLlib example</summary>
+<details><summary>Show DLlib Scala example</summary>
 <br/>
 
-You can build distributed deep learning applications for Spark using *DLlib* in 3 simple steps:
+Image Classification using *DLlib* Keras-Style Scala API.
 
 ```scala
-// 1. Call `initNNContext` at the beginning of the code: 
-import com.intel.analytics.bigdl.dllib.NNContext
+// 1. Init the context for DLlib
 val sc = NNContext.initNNContext()
 
-// 2. Define the Deep Learning model using Keras-style API in DLlib:
-val input = Input[Float](inputShape = Shape(10))  
-val dense = Dense[Float](12).inputs(input)  
-val output = Activation[Float]("softmax").inputs(dense)  
+// 2. Define the model using Keras-style API in DLlib:
+val input = Input[Float](inputShape = Shape(10))
+val dense = Dense[Float](12).inputs(input)
+val output = Activation[Float]("softmax").inputs(dense)
 val model = Model(input, output)
 
-// 3. Use `NNEstimator` to train/predict/evaluate the model using Spark Dataframe and ML pipeline APIs
-val trainingDF = spark.read.parquet("train_data")
-val validationDF = spark.read.parquet("val_data")
-val scaler = new MinMaxScaler().setInputCol("in").setOutputCol("value")
-val estimator = NNEstimator(model, CrossEntropyCriterion())  
-        .setBatchSize(size).setOptimMethod(new Adam()).setMaxEpoch(epoch)
-val pipeline = new Pipeline().setStages(Array(scaler, estimator))
+// 3. Load Image data from local folder
+val imgDF = NNImageReader.readImages(...).withColumn("label", ...)
 
-val pipelineModel = pipeline.fit(trainingDF)  
-val predictions = pipelineModel.transform(validationDF)
+// 4. compile and fit
+model.compile(optimizer = RMSprop[Float](), loss = BinaryCrossEntropy[Float](), metrics = List(new Top1Accuracy[Float]()))
+
+model.fit(trainingDF, labelCols = Array("label"), batchSize = 32, nbEpoch = 5)
+
 ```
 
-  See the [NNframes](https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/nnframes.html) and [Keras API](https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/keras-api.html) user guides for more details.
+<details><summary>Show DLlib Python example</summary>
+<br/>
+
+Image Classification using *DLlib* Keras-Style Python API.
+
+```python
+// 1. Init the context for DLlib
+val sc = NNContext.initNNContext()
+
+// 2. Define the model using Keras-style API in DLlib:
+model = Sequential()
+model.add(Convolution2D(...))
+model.add(MaxPooling2D())
+model.add(Flatten())
+model.add(Dense(10, activation="softmax"))
+
+
+// 2. Load Image data from local folder
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data(...)
+
+// 3. compile
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(X_train, Y_train, batch_size=32, nb_epoch=5)
+
+```
+
+
+  See the DLLib [NNframes](https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/nnframes.html) and [Keras API](https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/keras-api.html) user guides for more details.
 
 </details>
 
@@ -200,9 +224,9 @@ init_orca_context(cluster_mode="yarn", cores=4, memory="10g", num_nodes=2, init_
 # 2. Create `TSDataset` for your time series data
 from bigdl.chronos.data import TSDataset
 tsdata_train, tsdata_valid, tsdata_test\
-        = TSDataset.from_pandas(df, 
-                                dt_col="dt_col", 
-                                target_col="target_col", 
+        = TSDataset.from_pandas(df,
+                                dt_col="dt_col",
+                                target_col="target_col",
                                 ...)
 
 # 3. Train time series model using `AutoTSEstimator`
@@ -215,11 +239,11 @@ ts_pipeline.predict(tsdata_test)
 
 See the Chronos [user guide](https://bigdl.readthedocs.io/en/latest/doc/Chronos/Overview/chronos.html) and [example](https://bigdl.readthedocs.io/en/latest/doc/Chronos/QuickStart/chronos-autotsest-quickstart.html) for more details.
 
-</details>  
+</details>
 
 ### PPML
 
-*BigDL PPML* provides a **hardware (Intel SGX) protected** *Trusted Cluster Environment* for running distributed Big Data & AI applications (in a secure fashion on private or public cloud). See the PPML [tutorial](https://github.com/intel-analytics/BigDL/blob/main/ppml/README.md) and [user guide](https://bigdl.readthedocs.io/en/latest/doc/PPML/Overview/ppml.html) for more details. 
+*BigDL PPML* provides a **hardware (Intel SGX) protected** *Trusted Cluster Environment* for running distributed Big Data & AI applications (in a secure fashion on private or public cloud). See the PPML [tutorial](https://github.com/intel-analytics/BigDL/blob/main/ppml/README.md) and [user guide](https://bigdl.readthedocs.io/en/latest/doc/PPML/Overview/ppml.html) for more details.
 
 ## Getting Support
 
