@@ -40,6 +40,7 @@ flowchart TD;
     Feature3-- High Level App Framework -->Feature4[Domain?];
     Feature4-- Time Series -->ReferChronos([<em><strong>Chronos</strong></em>]);
     Feature4-- Recommendation System -->ReferFriesian([<em><strong>Friesian</strong></em>]);
+    
     click ReferNano "https://bigdl.readthedocs.io/en/latest/doc/Nano/Overview/nano.html" "Refer to Nano" _parent
     click ReferOrca "https://bigdl.readthedocs.io/en/latest/doc/Orca/Overview/orca.html"
     click ReferDLlib "https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/dllib.html"
@@ -47,10 +48,12 @@ flowchart TD;
     click ReferChronos "https://bigdl.readthedocs.io/en/latest/doc/Chronos/Overview/chronos.html"
     click ReferFriesian "https://bigdl.readthedocs.io/en/latest/doc/Chronos/Overview/chronos.html"
     click ReferPPML "https://bigdl.readthedocs.io/en/latest/doc/PPML/Overview/ppml.html"
+    
     classDef ReferStyle1 fill:#f96;
     classDef Feature fill:#FFF,stroke:#0f29ba,stroke-width:1px;
     class ReferNano,ReferOrca,ReferDLlib,ReferDLlib2,ReferChronos,ReferFriesian,ReferPPML ReferStyle1;
     class Feature1,Feature2,Feature3,Feature4,Feature5,Feature6,Feature7 Feature;
+
 ```
 ---
 ## Installing
