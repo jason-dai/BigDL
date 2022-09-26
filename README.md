@@ -53,7 +53,7 @@ flowchart TD;
     classDef Feature fill:#FFF,stroke:#0f29ba,stroke-width:1px;
     class ReferNano,ReferOrca,ReferDLlib,ReferDLlib2,ReferChronos,ReferFriesian,ReferPPML ReferStyle1;
     class Feature1,Feature2,Feature3,Feature4,Feature5,Feature6,Feature7 Feature;
-
+    
 ```
 ---
 ## Installing
