@@ -101,7 +101,7 @@ flowchart TD;
 
   # 4. Use Orca Estimator for distributed training/inference
   from bigdl.orca.learn.tf.estimator import Estimator
-  est = Estimator.from_keras(keras_model=model)
+  est = Estimator.from_keras(keras_model=model) 
   est.fit(data=df,
           feature_cols=['user', 'item'],
           label_cols=['label'],
