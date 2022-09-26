@@ -117,7 +117,7 @@ flowchart TD;
   <details><summary>Show RayOnSpark example</summary>
   <br/>
   
-  You can not only run Ray program on Spark cluster, but also write Ray code inline with Spark code (so as to process the in-memory Spark RDDs or DataFrames) using _RayOnSpark_ in Orca.
+  You can directly run Ray program on Spark cluster, and write Ray code inline with Spark code (so as to process the in-memory Spark RDDs or DataFrames) using _RayOnSpark_ in Orca.
 
   ```python
   # 1. Initilize Orca Context (to run your program on K8s, YARN or local laptop)
