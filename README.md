@@ -83,7 +83,7 @@ flowchart TD;
   ```python
   # 1. Initilize Orca Context (to run your program on K8s, YARN or local laptop)
   from bigdl.orca import init_orca_context, OrcaContext
-  sc = init_orca_context(cluster_mode="k8s", cores=4, memory="10g", num_nodes=2)
+  sc = init_orca_context(cluster_mode="k8s", cores=4, memory="10g", num_nodes=2) 
 
   # 2. Perform distribtued data processing (supporting Spark DataFrames,
   # TensorFlow Dataset, PyTorch DataLoader, Ray Dataset, Pandas, Pillow, etc.)
@@ -96,7 +96,7 @@ flowchart TD;
   # (supporting TensorFlow, PyTorch, Keras, OpenVino, etc.)
   from tensorflow import keras
   ...
-  model = keras.models.Model(inputs=[user, item], outputs=predictions)
+  model = keras.models.Model(inputs=[user, item], outputs=predictions) 
   model.compile(...)
 
   # 4. Use Orca Estimator for distributed training/inference
