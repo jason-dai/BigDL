@@ -110,7 +110,7 @@ flowchart TD;
 
   See [TensorFlow](https://bigdl.readthedocs.io/en/latest/doc/Orca/QuickStart/orca-tf-quickstart.html) and [PyTorch](https://bigdl.readthedocs.io/en/latest/doc/Orca/QuickStart/orca-pytorch-quickstart.html) quickstart, as well as the [document website](https://bigdl.readthedocs.io/), for more details.
 
-  </details> 
+  </details>  
 
 - In addition, you can also run standard **Ray** programs on Spark cluster using _**RayOnSpark**_ in Orca.
 
@@ -129,7 +129,7 @@ flowchart TD;
   df = spark.read.parquet(file_path)
   from bigdl.orca.data import spark_df_to_ray_dataset
   dataset = spark_df_to_ray_dataset(df)
- 
+  
   # 3. Use Ray to operate on Ray Datasets
   import ray
 
@@ -144,7 +144,7 @@ flowchart TD;
   ```
 
   See the RayOnSpark [user guide](https://bigdl.readthedocs.io/en/latest/doc/Ray/Overview/ray.html) and [quickstart](https://bigdl.readthedocs.io/en/latest/doc/Ray/QuickStart/ray-quickstart.html) for more details.
-  </details>
+  </details>  
 
 
 ### DLlib
