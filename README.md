@@ -175,6 +175,7 @@ model.compile(optimizer = RMSprop[Float](), loss = BinaryCrossEntropy[Float](), 
 model.fit(trainingDF, labelCols = Array("label"), batchSize = 32, nbEpoch = 5)
 
 ```
+</details>
 
 <details><summary>Show DLlib Python example</summary>
 <br/>
@@ -201,7 +202,6 @@ model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=
 model.fit(X_train, Y_train, batch_size=32, nb_epoch=5)
 
 ```
-
 
   See the DLLib [NNframes](https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/nnframes.html) and [Keras API](https://bigdl.readthedocs.io/en/latest/doc/DLlib/Overview/keras-api.html) user guides for more details.
 
