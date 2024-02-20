@@ -11,7 +11,7 @@ Running Text-Generation-WebUI
 ### Run in Docker
 Running built-in examples and benchmarks
 
-## Develop `bigdl-llm` program
+## Write PyTorch code using `bigdl-llm`
 ### Install
 1. Windows & GPU
 2. Linux & GPU
@@ -25,7 +25,7 @@ Running built-in examples and benchmarks
  
 ### Finetuning
 
-## Use other libraries with BigDL-LLM
+## Use other libraries with `bigdl-llm`
 1. HF
 2. ModelScope
 3. ...
