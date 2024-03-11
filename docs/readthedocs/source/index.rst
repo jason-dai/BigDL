@@ -24,6 +24,7 @@ BigDL-LLM
 ============================================
 Latest update 🔥
 ============================================
+- [2024/03] ``bigdl-llm`` now supports both `LangChain <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/GPU/LangChain>`_ and `LlamaIndex <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/GPU/LlamaIndex>`_ pipelines on `CPU <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/CPU/LangChain>`_ and `GPU <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/GPU/LangChain>`_.
 - [2024/02] ``bigdl-llm`` now supports directly loading model from `ModelScope <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/GPU/ModelScope-Models>`_ (`魔搭 <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/CPU/ModelScope-Models>`_).
 - [2024/02] ``bigdl-llm`` added inital **INT2** support (based on llama.cpp `IQ2 <https://github.com/intel-analytics/BigDL/tree/main/python/llm/example/GPU/HF-Transformers-AutoModels/Advanced-Quantizations/GGUF-IQ2>`_ mechanism), which makes it possible to run large-size LLM (e.g., Mixtral-8x7B) on Intel GPU with 16GB VRAM.
 - [2024/02] Users can now use ``bigdl-llm`` through `Text-Generation-WebUI <https://github.com/intel-analytics/text-generation-webui>`_ GUI.
